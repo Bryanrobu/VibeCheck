@@ -4,6 +4,10 @@ import discord
 from discord import app_commands
 from dotenv import load_dotenv
 
+import sqlite3
+con = sqlite3.connect("vibeCheck.db")
+cur = con.cursor()
+
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 GUILD_ID = os.getenv("SERVER_ID")
@@ -29,6 +33,8 @@ bot = Vibecheck()
 @bot.event
 async def on_ready():
     print(f"{bot.user} is online!")
+    cur.execute("CREATE TABLE IF NOT EXISTS checkins(uid, datum, score, beschrijving)")
+    cur.execute("CREATE TABLE IF NOT EXISTS memes(naam, afbeelding, kans)")
 
 
 @bot.tree.command(name="ping", description="Test of Vibecheck werkt")
