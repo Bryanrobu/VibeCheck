@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#FFF4C2"/>
+      <stop offset="100%" stop-color="#FFB86B"/>
+    </radialGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8EE06A"/>
+      <stop offset="100%" stop-color="#4FB548"/>
+    </linearGradient>
+    <linearGradient id="belly" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E9FBC9"/>
+      <stop offset="100%" stop-color="#C9F09A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- achtergrond (Discord snijdt rond af) -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- zonnestralen -->
+  <g fill="#FFFFFF" opacity="0.35">
+    <path d="M256 256 L230 0 L282 0 Z"/>
+    <path d="M256 256 L0 200 L0 260 Z"/>
+    <path d="M256 256 L512 200 L512 260 Z"/>
+    <path d="M256 256 L60 20 L110 0 Z"/>
+    <path d="M256 256 L452 20 L402 0 Z"/>
+  </g>
+
+  <!-- sparkles -->
+  <g fill="#FFFFFF">
+    <path d="M88 120 l8 20 l20 8 l-20 8 l-8 20 l-8 -20 l-20 -8 l20 -8 z"/>
+    <path d="M420 96 l6 14 l14 6 l-14 6 l-6 14 l-6 -14 l-14 -6 l14 -6 z"/>
+    <path d="M440 330 l5 11 l11 5 l-11 5 l-5 11 l-5 -11 l-11 -5 l11 -5 z"/>
+  </g>
+
+  <!-- lijf -->
+  <ellipse cx="256" cy="420" rx="150" ry="110" fill="url(#skin)"/>
+  <ellipse cx="256" cy="440" rx="95" ry="70" fill="url(#belly)"/>
+
+  <!-- hoofd -->
+  <ellipse cx="256" cy="300" rx="185" ry="140" fill="url(#skin)"/>
+
+  <!-- oogbollen -->
+  <circle cx="170" cy="190" r="68" fill="url(#skin)"/>
+  <circle cx="342" cy="190" r="68" fill="url(#skin)"/>
+  <circle cx="170" cy="190" r="50" fill="#FFFFFF"/>
+  <circle cx="342" cy="190" r="50" fill="#FFFFFF"/>
+  <circle cx="178" cy="196" r="28" fill="#1F2A2E"/>
+  <circle cx="334" cy="196" r="28" fill="#1F2A2E"/>
+  <circle cx="188" cy="184" r="10" fill="#FFFFFF"/>
+  <circle cx="344" cy="184" r="10" fill="#FFFFFF"/>
+  <circle cx="172" cy="206" r="4" fill="#FFFFFF"/>
+  <circle cx="328" cy="206" r="4" fill="#FFFFFF"/>
+
+  <!-- neusgaatjes -->
+  <ellipse cx="236" cy="268" rx="6" ry="4" fill="#2E7D32"/>
+  <ellipse cx="276" cy="268" rx="6" ry="4" fill="#2E7D32"/>
+
+  <!-- blosjes -->
+  <ellipse cx="128" cy="320" rx="30" ry="18" fill="#FF7FA8" opacity="0.6"/>
+  <ellipse cx="384" cy="320" rx="30" ry="18" fill="#FF7FA8" opacity="0.6"/>
+
+  <!-- grote glimlach -->
+  <path d="M170 305 Q256 400 342 305 Q256 350 170 305 Z" fill="#2E3B2F"/>
+  <path d="M215 345 Q256 372 297 345 Q256 360 215 345 Z" fill="#FF6F91"/>
+  <path d="M170 305 Q256 400 342 305" fill="none" stroke="#2E3B2F" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- duimpje omhoog -->
+  <g transform="translate(372 392) rotate(-12)">
+    <rect x="0" y="22" width="56" height="50" rx="16" fill="#5DC24F"/>
+    <rect x="12" y="-14" width="22" height="48" rx="11" fill="#5DC24F"/>
+    <path d="M10 40 h36 M10 54 h36" stroke="#3E9A3A" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>
