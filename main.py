@@ -42,6 +42,16 @@ async def on_ready():
 async def ping(interaction: discord.Interaction):
     await interaction.response.send_message("Pong! Vibecheck is online.")
 
+@bot.tree.command(name="clear", description="Clear je checkins! (tijdelijk voor tests)")
+async def clear(interaction: discord.Interaction):
+    cur.execute("DELETE FROM checkins WHERE uid = ?", (interaction.user.id,))
+    aantal = cur.rowcount
+    con.commit()
+    await interaction.response.send_message(
+        f"Je gegevens zijn verwijderd: {aantal} check-in(s) gewist.",
+        ephemeral=True,
+    )
+
 
 @bot.tree.command(name="checkin", description="Laat weten hoe je je voelt")
 @app_commands.describe(
