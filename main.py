@@ -1,5 +1,7 @@
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
+dagen = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"]
+maanden = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"]
 
 import discord
 from discord import app_commands
@@ -73,5 +75,38 @@ async def checkin(
         f"Check-in opgeslagen! Score: {score}/10\n> {beschrijving}",
         ephemeral=True,
     )
+
+@bot.tree.command(name="mijnweek", description="Geeft een overzicht van jou checkins gedurende de week")
+async def mijn_week(
+    interaction: discord.Interaction
+):
+    vorigeWeek = (datetime.now() - timedelta(days=7)).isoformat()
+    cur.execute(
+        "SELECT * FROM checkins WHERE uid = ? AND datum >= ?",
+    (interaction.user.id, vorigeWeek),
+    )
+    results = cur.fetchall()
+    if not results:
+        await interaction.response.send_message("Je hebt nog geen check-ins gevonden voor deze week.")
+        return
+
+    bericht = "Hier is jouw overzicht van deze week:\n"
+
+    for row in results:
+        tijd_string = row[1]
+        cijfer = row[2]
+        reden = row[3]
+
+        dt = datetime.fromisoformat(tijd_string)
+        dag_naam = dagen[dt.weekday()]
+        maand_naam = maanden[dt.month - 1]
+        dag_nummer = dt.day
+        tijd = dt.strftime("%H:%M")
+
+        mooie_tijd = f"{dag_naam} {dag_nummer} {maand_naam} om {tijd}"
+
+        bericht += f"- {mooie_tijd} voelde je jezelf {cijfer} omdat: {reden}\n"
+
+    await interaction.response.send_message(bericht, ephemeral=True,)
 
 bot.run(TOKEN)
