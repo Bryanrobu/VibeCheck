@@ -37,7 +37,18 @@ MEME_NIVEAUS = {
     "biertje": "gewoon",
     "mooi": "zeldzaam",
     "schaap": "legendarisch",
-    
+    "man-in-de-auto": "gewoon",
+    "man-bij-de-container": "gewoon",
+    "maak-je-ernie-druk": "zeldzaam",
+    "man-man-man": "episch",
+    "applausje-of-wa": "legendarisch",
+    "oude-koeien-uit-de-sloot": "episch",
+    "belgie-zuid-nederland": "gewoon",
+    "interview-reactie": "zeldzaam",
+    "boze-jongen": "gewoon",
+    "broccoli-man": "zeldzaam",
+    "at5-interview": "episch",
+    "pelle-is-aan-het-maaien": "legendarisch",
 }
 
 
