@@ -97,7 +97,6 @@ def ensure_collection_schema():
 
 
 def sync_memes():
-    # nieuwe plaatjes in img/ toevoegen
     bekend = {r[0] for r in cur.execute("SELECT afbeelding FROM memes").fetchall()}
     for pad in IMG_DIR.iterdir():
         if pad.suffix.lower() in EXTENSIES and pad.name not in bekend:
@@ -106,7 +105,6 @@ def sync_memes():
                 (pad.stem, pad.name, STANDAARD_NIVEAU),
             )
 
-    # oude getallen (bijv. 10) of onbekende waarden terugzetten naar gewoon
     geldig = tuple(ZELDZAAMHEID)
     cur.execute(
         f"UPDATE memes SET kans = ? WHERE kans NOT IN ({','.join('?' * len(geldig))})",
@@ -214,24 +212,20 @@ async def roll(interaction: discord.Interaction):
         )
         return
 
-    # 1. groepeer de memes per niveau (de opgeslagen naam)
     per_niveau = {}
     for m in memes:
         per_niveau.setdefault(m[2], []).append(m)
 
-    # 2. kies eerst een niveau, op basis van de percentages
     niveaus = list(per_niveau)
     niveau = random.choices(
         niveaus, weights=[ZELDZAAMHEID[n][0] for n in niveaus], k=1
     )[0]
 
-    # 3. kies dan een meme binnen dat niveau
     naam, bestand, _ = random.choice(per_niveau[niveau])
 
     totaal = sum(ZELDZAAMHEID[n][0] for n in niveaus)
     procent = ZELDZAAMHEID[niveau][0] / totaal * 100 / len(per_niveau[niveau])
     kleur = ZELDZAAMHEID[niveau][1]
-        # 4. meteen in de collectie zetten
     bestaand = cur.execute(
         "SELECT 1 FROM collectie WHERE uid = ? AND meme = ?",
         (interaction.user.id, naam),
@@ -268,16 +262,15 @@ async def collectie(interaction: discord.Interaction):
         ).fetchall()
     )
 
-    # zeldzaamste bovenaan
     volgorde = list(ZELDZAAMHEID)
     alle.sort(key=lambda m: volgorde.index(m[1]) if m[1] in volgorde else 0, reverse=True)
 
     regels = []
     for naam, niveau in alle:
         if naam in bezit:
-            regels.append(f"✅ **{naam}** · {niveau.capitalize()} · x{bezit[naam]}")
+            regels.append(f"X **{naam}** · {niveau.capitalize()} · x{bezit[naam]}")
         else:
-            regels.append(f"❓ ??? · {niveau.capitalize()}")
+            regels.append(f"? ??? · {niveau.capitalize()}")
 
     verzameld = sum(1 for naam, _ in alle if naam in bezit)
     totaal_rolls = sum(bezit.get(naam, 0) for naam, _ in alle)
