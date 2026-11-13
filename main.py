@@ -1,13 +1,7 @@
 import os
-<<<<<<< HEAD
 from datetime import datetime, timedelta
 dagen = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag", "zondag"]
 maanden = ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"]
-=======
-import random
-from datetime import datetime
-from pathlib import Path
->>>>>>> rng
 
 import discord
 from discord import app_commands
